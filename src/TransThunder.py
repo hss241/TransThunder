@@ -64,13 +64,23 @@ def Main():
         reset = Back.RESET
         if (res[0]['enemy'] == True):
             forecolor = Back.RED
+
         try:
             print (forecolor + ':' + reset + ' ' + res[0]['sender'] + ' [' + res[0]['mode'] + ']')
         except:
             print (forecolor + ':' + reset + ' ??? [' + res[0]['mode'] + ']')
+
+        try:
+            print (msg)
+        except:
+            print ('???')
+
+        try:
+            print (Translator().translate(msg, dest = lang).text + '\r\n')
+        except:
+            print ('???')
+
         
-        print (msg)
-        print (Translator().translate(msg, dest = lang).text + '\r\n')
             
 if __name__ == '__main__':
     colorama.init(autoreset=True)
