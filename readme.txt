@@ -13,3 +13,7 @@
 
 使用アイコン
 http://icooon-mono.com/10735-%e3%82%bc%e3%83%ad%e6%88%a6%e3%81%ae%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b3/
+
+使用ソース
+py-googletrans by SuHun Han
+https://github.com/ssut/py-googletrans
