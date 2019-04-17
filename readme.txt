@@ -17,3 +17,6 @@ http://icooon-mono.com/10735-%e3%82%bc%e3%83%ad%e6%88%a6%e3%81%ae%e3%82%a2%e3%82
 使用ソース
 py-googletrans by SuHun Han
 https://github.com/ssut/py-googletrans
+
+colorama by Jonathan Hartley
+https://github.com/tartley/colorama

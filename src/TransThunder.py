@@ -6,6 +6,7 @@ import re
 import os
 import colorama
 from colorama import Back
+import win_unicode_console
 
 def LangChecker(lang):  #翻訳先の言語の設定
     if (os.path.isfile('.\\TransThunder.txt')):
@@ -82,6 +83,7 @@ def Main():
 
         
 if __name__ == '__main__':
+    win_unicode_console.enable()
     colorama.init(autoreset=True)
     Main()
 
