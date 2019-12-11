@@ -1,4 +1,4 @@
-# This software translates battle chats in WarThunder.  
+# This software translates battle chats in WarThunder  
 ## How to use ( English )  
 1. Start
 2. Write the target language in TransThunder.txt generated in the same directory ( if you want to translate other languages into Japanese, change en to ja )
@@ -12,7 +12,7 @@
 - Target language
 - Radio chat
 
-
+---
 ## 使い方(日本語)
 1. 起動する
 2. 同階層に生成されるTransThunder.txtに翻訳先の言語を書く(他言語を日本語に翻訳するならenをjaに変える)
