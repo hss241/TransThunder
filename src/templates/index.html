@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        window.onload = function() 
+        {
+            var ip = location.hostname;
+            if (!location.hostname.match(/\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/))
+            {
+                ip = dns();
+            }
+            
+            var ws = new WebSocket("ws://" + ip + ":" + {{port|tojson}} + "/"); //hostnameだと失敗するのでipアドレスで指定しなくてはならない
+                ws.onopen = function(e)
+                {
+                    alert("Connected!");
+                };
+                ws.onmessage = function(e) 
+                {
+                    display(JSON.parse(e.data));
+                };
+                ws.onclose = function()
+                {
+                    alert("Disconnected...");
+                };
+        }
+
+        function dns() 
+        {
+            var dfd = $.Deferred(); //何も書かないとip = nullが返ってしまう
+            var ip = null;
+            $.ajax({
+                url: "http://" + location.host,
+                type:"POST",
+                dataType: "json",
+                data : {hostname : location.hostname},
+                async : false,
+                success:function(data){
+                    ip = data["ip"];
+                },
+            });
+            return ip;
+        }
+
+        function display(res)
+        {
+            var div = document.createElement("div");
+            if (res["bar"])
+            {
+                var bar = document.createElement("p");
+                bar.innerHTML = res["bar"];
+                div.appendChild(bar);
+            }
+            var sender = document.createElement("p");
+            sender.style.color = res["enemy"] == "true" ? "red" : "blue";
+            sender.innerHTML = res['sender'] + " [" + res['mode'] + "]";
+            div.appendChild(sender);
+            var msg = document.createElement("p");
+            msg.innerHTML = res["msg"].replace('\t', "");
+            div.appendChild(msg);
+            var trans = document.createElement("p");
+            trans.innerHTML = res["trans"];
+            div.appendChild(trans);
+
+            var body = document.body;
+            body.appendChild(div);
+
+            var height = document.documentElement.scrollHeight;
+            window.scroll(0, height);;
+        }
+    </script>
+<title>TransThunder</title>
+</head>
+<meta charset="utf-8">
+<body>
+</body>
+</html>
