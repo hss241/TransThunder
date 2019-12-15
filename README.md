@@ -8,7 +8,7 @@
 ## Display translation results in a browser ( Possible with smartphone )
 1. Rewrite from False to True in browse of transthunder.ini
 2. Write port number in flask and websocket of transthunder.ini ( Usually there is no problem even if it is not rewritten )
-3. Write IP address that allows access in host of transthunder.ini ( 0.0.0.0 is any )
+3. Write IP address in host of transthunder.ini ( Allow access only to this IP address )
 4. Enter the address and port number of the computer that launched this software into the browser
     Example ) http://localhost:10101/
 5. Displayed the same as the console!
@@ -30,7 +30,7 @@
 ## 翻訳結果をブラウザで表示できます(スマホでも可能)
 1. transthunder.iniのbrowseのFalseをTrueに書き換える
 2. transthunder.iniのflaskとwebsocketにポート番号を書く(大抵書き換えなくても問題はない)
-3. transthunder.iniのhostにアクセスを許可するIPアドレスを書く(0.0.0.0で全員許可)
+3. transthunder.iniのhostにIPアドレスを書く(このIPアドレスに対するアクセスだけ許可)
 4. このソフトを起動したPCのIPアドレスとポート番号をブラウザに入力
     例)http://localhost:10101/
 5. コンソールと同じように表示される！

@@ -7,7 +7,7 @@ class Config:
         if not os.path.exists('./transthunder.ini'):
             f = open('./transthunder.ini', 'w')
             f.write('[MAIN]\nlang=en\n;Display translation results in a browser? ( True or False ) \nbrowse=False' + os.linesep +
-            '[PORT]\nflask=10101\nwebsocket=10102' + os.linesep +'[IP]\n;IP address that allow access\nhost=0.0.0.0')
+            '[PORT]\nflask=10101\nwebsocket=10102' + os.linesep +'[IP]\n;Allow access only to this IP address\nhost=0.0.0.0')
             f.close()
 
     def iniReader(self):
