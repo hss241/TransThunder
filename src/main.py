@@ -20,6 +20,7 @@ class Main(Flask):
         c = Config()
         self.params = c.iniReader()
         self.sock_port = self.params['websocket']
+        self.host = self.params['host']
 
         @self.route('/', methods=['GET'])
         def index():
@@ -38,11 +39,11 @@ class Main(Flask):
         return os.path.join(base_path, relative_path)
 
     def websock(self):
-        self.w = Websocket(self.sock_port)
+        self.w = Websocket(self.sock_port, self.host)
         self.w.main()
 
     def flask(self):
-        self.run(debug=False, host=self.params['host'], port=self.params['flask'])
+        self.run(debug=False, host=self.host, port=self.params['flask'])
 
     def trans(self):
         t = Translate(self.params['lang'])

@@ -39,18 +39,16 @@ class Translate():
         msg = res['msg']
         msg = msg.replace('\t', '')
 
-        forecolor = colorama.Back.CYAN
         reset = colorama.Back.RESET
+        team = colorama.Back.CYAN + ':' + reset + ' '
         if (res['enemy'] == True):
-            forecolor = colorama.Back.RED
+            team = colorama.Back.RED + ';' + reset + ' '
 
         if (self.battle is False):
             print ('------------------------------')
             res['bar'] = '------------------------------'
-        print (forecolor + ':' + reset + ' ' + res['sender'] + ' [' + res['mode'] + ']')
-        print (msg)
         trans = Translator().translate(msg, dest = self.lang).text
-        print (trans + '\r\n')
+        print (team + res['sender'] + ' [' + res['mode'] + ']\r\n' + msg + '\r\n' + trans + '\r\n')
         res['trans'] = trans
         self.battle = True
 
