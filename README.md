@@ -1,6 +1,6 @@
 # This software translates chats in battle with WarThunder  
 ## How to use ( English )  
-1. Start
+1. Start TransThunder.exe
 2. Write the target language in lang of transthunder.ini generated in the same directory ( if you want to translate other languages into Japanese, change en to ja )
 3. Restart after changing the target language
 4. Chats in battle are translated and appear on the console!
@@ -22,7 +22,7 @@
 ---
 # WarThunderでの戦闘中のチャットを翻訳するソフトです  
 ## 使い方(日本語)
-1. 起動する
+1. TransThunder.exeを起動する
 2. 同階層に生成されるtransthunder.iniのlangに翻訳先の言語を書く(他言語を日本語に翻訳するならenをjaに変える)
 3. 翻訳先言語を変更したら、再起動する
 4. 戦闘中のチャットが翻訳されてコンソールに出てくる！
