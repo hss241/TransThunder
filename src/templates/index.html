@@ -53,7 +53,7 @@
                 div.appendChild(bar);
             }
             var sender = document.createElement("p");
-            sender.style.color = res["enemy"] == "true" ? "red" : "blue";
+            sender.style.color = res["enemy"] == true ? "red" : "blue";
             sender.innerHTML = res['sender'] + " [" + res['mode'] + "]";
             div.appendChild(sender);
             var msg = document.createElement("p");
