@@ -4,11 +4,21 @@ import configparser
 
 class Config:
     def __init__(self):
+        inistr = ['[MAIN]', '\n','lang=','en', '\n',';Display translation results in a browser? ( True or False ) ', '\n','browse=','False', '\n',';Beep when you receive a chat ( True or False ) ', '\n','beep=','False', '\n', '\n', '[PORT]', '\n','flask=','10101', '\n','websocket=','10102', '\n', '\n', '[IP]', '\n',';Allow access only to this IP address', '\n','host=','0.0.0.0']
         if not os.path.exists('./transthunder.ini'):
-            f = open('./transthunder.ini', 'w')
-            f.write('[MAIN]\nlang=en\n;Display translation results in a browser? ( True or False ) \nbrowse=False' + os.linesep +
-            '[PORT]\nflask=10101\nwebsocket=10102' + os.linesep +'[IP]\n;Allow access only to this IP address\nhost=0.0.0.0')
-            f.close()
+            self.iniEditor(inistr)
+        params = self.iniReader()
+        if (len(params) == 6):  #設定値の個数
+            return
+        
+        for param in params:
+            inistr[inistr.index(param + '=') + 1] = params[param]
+        self.iniEditor(inistr)
+
+    def iniEditor(self, inistr):
+        f = open('./transthunder.ini', 'w')
+        f.writelines(inistr)
+        f.close()
 
     def iniReader(self):
         ini = configparser.SafeConfigParser()

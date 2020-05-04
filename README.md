@@ -1,17 +1,20 @@
-# This software translates chats in battle with WarThunder  
+# This software translates chats in battle in WarThunder  
 ## How to use ( English )  
 1. Start TransThunder.exe
-2. Write the target language in lang of transthunder.ini generated in the same directory ( if you want to translate other languages into Japanese, change en to ja )
+2. Write the target language in the transthunder.ini's lang, which is generated in the same directory ( If you want to translate other languages to Japanese, change en to ja )
 3. Restart after changing the target language
-4. Chats in battle are translated and appear on the console!
+4. The chat in combat is translated and comes out on the console!
 
-## Display translation results in a browser ( Possible with smartphone )
-1. Rewrite from False to True in browse of transthunder.ini
-2. Write port number in flask and websocket of transthunder.ini ( Usually there is no problem even if it is not rewritten )
-3. Write IP address in host of transthunder.ini ( Allow access only to this IP address )
-4. Enter the address and port number of the computer that launched this software into the browser
+## Beep when you receive a chat with or without a translation
+1. Rewrite transthunder.ini's beep to True
+
+## You can view the translation results in your browser ( Even on your smartphone )
+1. Rewrite transthunder.ini's browse to True
+2. Write the port number in the transthunder.ini's flask and websocket ( Usually no problem without rewriting )
+3. Write an IP address in the transthunder.ini's host ( Only access to this IP address is allowed )
+4. Enter the IP address and port number of the PC on which this software is running into your browser
     Example ) http://localhost:10101/
-5. Displayed the same as the console!
+5. It shows up just like the console!
 
 ### Translated
 - Other languages
@@ -23,15 +26,18 @@
 # WarThunderでの戦闘中のチャットを翻訳するソフトです  
 ## 使い方(日本語)
 1. TransThunder.exeを起動する
-2. 同階層に生成されるtransthunder.iniのlangに翻訳先の言語を書く(他言語を日本語に翻訳するならenをjaに変える)
+2. 同階層に生成されるtransthunder.iniのlangに、翻訳先の言語を書く(他言語を日本語に翻訳するならenをjaに変える)
 3. 翻訳先言語を変更したら、再起動する
 4. 戦闘中のチャットが翻訳されてコンソールに出てくる！
 
+## 翻訳の有無にかかわらず、チャットを受信した時にビープ音を鳴らす
+1. transthunder.iniのbeepをTrueに書き換える
+
 ## 翻訳結果をブラウザで表示できます(スマホでも可能)
-1. transthunder.iniのbrowseのFalseをTrueに書き換える
+1. transthunder.iniのbrowseをTrueに書き換える
 2. transthunder.iniのflaskとwebsocketにポート番号を書く(大抵書き換えなくても問題はない)
 3. transthunder.iniのhostにIPアドレスを書く(このIPアドレスに対するアクセスだけ許可)
-4. このソフトを起動したPCのIPアドレスとポート番号をブラウザに入力
+4. このソフトを起動しているPCのIPアドレスとポート番号をブラウザに入力
     例)http://localhost:10101/
 5. コンソールと同じように表示される！
 
@@ -61,3 +67,6 @@
 
 - **flask-cors** by **corydolphin**
   - https://github.com/corydolphin/flask-cors
+
+- **win_unicode_console** by **Drekin**
+  - https://github.com/Drekin/win-unicode-console

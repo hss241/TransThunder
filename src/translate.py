@@ -31,7 +31,7 @@ class Translate():
         self.lastId = res[0]['id']
         if (len(res) == 0 or re.search('<color=#\w*>', res[0]['msg']) or
             Translator().detect(res[0]['msg']).lang == self.lang or res[0]['sender'] == ''):
-            res = []
+            res = ['receive']
         return res
 
     def msgViewer (self, res):

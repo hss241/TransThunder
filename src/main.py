@@ -9,6 +9,9 @@ import threading
 import socket
 import logging
 import os
+import platform
+if platform.system() == "Windows":
+    import winsound
 
 logging.disable(logging.FATAL)
 CORS(Flask(__name__))
@@ -45,16 +48,34 @@ class Main(Flask):
     def flask(self):
         self.run(debug=False, host=self.host, port=self.params['flask'])
 
+    def beep(self):
+        try:
+            winsound.Beep(880, 1000)    #windows
+        except:
+            os.system('play -n synth %s sin %s' % (1000, 880))  #mac, linux
+
     def trans(self):
         t = Translate(self.params['lang'])
         while (True):
             sleep(1)
             res = t.msgChecker()
-            if (len(res) == 0):
+            if (len(res) >= 1 and self.params['beep'] == 'True'):
+                self.beep()
+            if (len(res) == 0 or res[0] == 'receive'):
                 continue
             res = t.msgViewer(res)
             if (self.params['browse'] == 'True'):
                 self.w.send_message(res)
+
+    def clearConsole(self):
+        try:
+            os.system('cls')    #windows
+        except:
+            import subprocess as sp
+            try:
+                tmp = sp.call('cls',Shell=True) #mac
+            except:
+                tmp = sp.call('clear',Shell=True)   #linux
 
     def main(self):
         if (self.params['browse'] == 'True'):
@@ -62,7 +83,7 @@ class Main(Flask):
             t1.start()
             t2 = threading.Thread(target=self.flask)
             t2.start()
-        os.system('cls')
+        self.clearConsole()
         t3 = threading.Thread(target=self.trans)
         t3.start()
         t3.join()
