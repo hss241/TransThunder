@@ -60,7 +60,8 @@ class Main(Flask):
             sleep(1)
             res = t.msgChecker()
             if (len(res) >= 1 and self.params['beep'] == 'True'):
-                self.beep()
+                th4 = threading.Thread(target=self.beep)
+                th4.start()
             if (len(res) == 0 or res[0] == 'receive'):
                 continue
             res = t.msgViewer(res)
@@ -79,14 +80,14 @@ class Main(Flask):
 
     def main(self):
         if (self.params['browse'] == 'True'):
-            t1 = threading.Thread(target=self.websock)
-            t1.start()
-            t2 = threading.Thread(target=self.flask)
-            t2.start()
+            th1 = threading.Thread(target=self.websock)
+            th1.start()
+            th2 = threading.Thread(target=self.flask)
+            th2.start()
         self.clearConsole()
-        t3 = threading.Thread(target=self.trans)
-        t3.start()
-        t3.join()
+        th3 = threading.Thread(target=self.trans)
+        th3.start()
+        th3.join()
 
 if __name__ == '__main__':
     m = Main()
