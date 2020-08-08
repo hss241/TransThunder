@@ -1,5 +1,5 @@
 from config import Config
-from translate import Translate
+from message import Message
 from websocket_service import Websocket
 from time import sleep
 from flask import Flask, render_template, request, jsonify
@@ -9,9 +9,8 @@ import threading
 import socket
 import logging
 import os
-import platform
-if platform.system() == "Windows":
-    import winsound
+import winsound
+from resource_path import Resource_path
 
 logging.disable(logging.FATAL)
 CORS(Flask(__name__))
@@ -19,77 +18,57 @@ CORS(Flask(__name__))
 class Main(Flask):
     def __init__(self, *args, **kwargs):
         super(Main, self).__init__(__name__, *args, **kwargs)
-        self.jinja_loader = FileSystemLoader(self.resource_path('./templates'))
+        self.jinja_loader = FileSystemLoader(Resource_path("./templates"))
         c = Config()
         self.params = c.iniReader()
-        self.sock_port = self.params['websocket']
-        self.host = self.params['host']
+        self.sock_port = self.params["websocket"]
+        self.host = self.params["host"]
 
-        @self.route('/', methods=['GET'])
+        @self.route("/", methods=["GET"])
         def index():
-            return render_template('index.html', port=self.sock_port)
+            return render_template("index.html", port=self.sock_port)
 
-        @self.route('/', methods=['POST'])
+        @self.route("/", methods=["POST"])
         def dns():
             ip = socket.gethostbyname(request.form["hostname"])
             return jsonify({"ip":ip})
 
-    def resource_path(self, relative_path):
-        try:
-            base_path = sys._MEIPASS
-        except Exception:
-            base_path = os.path.dirname(__file__)
-        return os.path.join(base_path, relative_path)
-
     def websock(self):
-        self.w = Websocket(self.sock_port, self.host)
-        self.w.main()
+        self.ws = Websocket(self.sock_port, self.host)
+        self.ws.main()
 
     def flask(self):
-        self.run(debug=False, host=self.host, port=self.params['flask'])
+        self.run(debug=False, host=self.host, port=self.params["flask"])
 
     def beep(self):
-        try:
-            winsound.Beep(880, 1000)    #windows
-        except:
-            os.system('play -n synth %s sin %s' % (1000, 880))  #mac, linux
+        winsound.Beep(880, 1000)
 
     def trans(self):
-        t = Translate(self.params['lang'])
+        m = Message(self.params["lang"], self.params["accuracy"])
         while (True):
             sleep(1)
-            res = t.msgChecker()
-            if (len(res) >= 1 and self.params['beep'] == 'True'):
-                th4 = threading.Thread(target=self.beep)
-                th4.start()
-            if (len(res) == 0 or res[0] == 'receive'):
+            res = m.checker()
+            if (len(res) >= 1 and self.params["beep"] == "True"):
+                th = threading.Thread(target=self.beep)
+                th.start()
+            if (len(res) == 0 or res[0] == "receive"):
                 continue
-            res = t.msgViewer(res)
-            if (self.params['browse'] == 'True'):
-                self.w.send_message(res)
-
-    def clearConsole(self):
-        try:
-            os.system('cls')    #windows
-        except:
-            import subprocess as sp
-            try:
-                tmp = sp.call('cls',Shell=True) #mac
-            except:
-                tmp = sp.call('clear',Shell=True)   #linux
+            res = m.viewer(res)
+            if (self.params["browse"] == "True"):
+                self.ws.send_message(res)
 
     def main(self):
-        if (self.params['browse'] == 'True'):
+        if (self.params["browse"] == "True"):
             th1 = threading.Thread(target=self.websock)
             th1.start()
             th2 = threading.Thread(target=self.flask)
             th2.start()
-        self.clearConsole()
+        os.system("cls")
         th3 = threading.Thread(target=self.trans)
         th3.start()
         th3.join()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     m = Main()
     m.main()
 
