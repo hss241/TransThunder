@@ -20,7 +20,7 @@
 - Setting accuracy to True in transthunder.ini will result in a more accurate translation
   - You need to install Firefox (79.0) or Chrome (84.0.4147.30) or above version
     - Firefox takes precedence
-      - Unsupported languages will still be translated as before
+    - Unsupported languages will still be translated as before
 
 ### Translated
 - Other languages
@@ -51,7 +51,7 @@
 - transthunder.iniでaccuracyをTrueに設定すると、より正確な翻訳になります
   - Firefox(79.0)またはChrome(84.0.4147.30)以上のバージョンをインストールする必要があります
     - Firefoxが優先されます
-      - サポートされていない言語は以前と同じように翻訳されます
+    - サポートされていない言語は以前と同じように翻訳されます
 
 ### 翻訳されるもの
 - 他の言語
