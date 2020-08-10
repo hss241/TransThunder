@@ -5,7 +5,7 @@
 3. Restart after changing the target language
 4. The chat in combat is translated and comes out on the console!
 
-## Beep when you receive a chat with or without a translation
+## Beep when you receive a chat
 1. Rewrite transthunder.ini's beep to True
 
 ## You can view the translation results in your browser ( Even on your smartphone )
@@ -36,7 +36,7 @@
 3. 翻訳先言語を変更したら、再起動する
 4. 戦闘中のチャットが翻訳されてコンソールに出てくる！
 
-## 翻訳の有無にかかわらず、チャットを受信した時にビープ音を鳴らす
+## チャットを受信した時にビープ音を鳴らす
 1. transthunder.iniのbeepをTrueに書き換える
 
 ## 翻訳結果をブラウザで表示できます(スマホでも可能)
