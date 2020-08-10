@@ -48,12 +48,12 @@ class Main(Flask):
         while (True):
             sleep(1)
             res = m.checker()
-            if (len(res) >= 1 and self.params["beep"] == "True"):
-                th = threading.Thread(target=self.beep)
-                th.start()
-            if (len(res) == 0 or res[0] == "receive"):
+            if (len(res) == 0):
                 continue
             res = m.viewer(res)
+            if (self.params["beep"] == "True"):
+                th = threading.Thread(target=self.beep)
+                th.start()
             if (self.params["browse"] == "True"):
                 self.ws.send_message(res)
 

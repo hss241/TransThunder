@@ -12,9 +12,11 @@ class Message():
         self.lang = lang
         self.battle = False
         self.lastId = 0
+        os.system("title Normal Translation")
         if (accuracy == "True" and any(lang in item for item in ["ja","en","de","fr","es","pt","it","nl","pl","ru","zh"])):
             try:
                 self.dl = DeepyL(lang)
+                os.system("title High Accurate Translation")
             except:
                 pass
         win_unicode_console.enable()
@@ -22,24 +24,25 @@ class Message():
 
     def checker(self):   #翻訳するメッセージの選択
         res = []
-        lastIdList = ['0', str(self.lastId)]
-        for parameter in lastIdList:
-            try:
-                res = json.loads(requests.get('http://localhost:8111/gamechat?lastId=' + parameter).text)
-            except: #ゲームが起動していない場合
-                self.lastId = 0
-            finally:
-                if (len(res) == 0): #新規メッセージがない場合
-                    if (parameter == '0'):  #試合していない場合
-                        if (self.battle is True):
-                            self.dl.close()
-                        self.battle = False
-                    return res
+        while (len(res) == 0):
+            lastIdList = ['0', str(self.lastId)]
+            for parameter in lastIdList:
+                try:
+                    res = json.loads(requests.get('http://localhost:8111/gamechat?lastId=' + parameter).text)
+                except: #ゲームが起動していない場合
+                    self.lastId = 0
+                finally:
+                    if (len(res) == 0): #新規メッセージがない場合
+                        if (parameter == '0'):  #試合していない場合
+                            if (self.battle is True):
+                                self.dl.close()
+                                self.battle = False
+                        return res
 
-        self.lastId = res[0]['id']
-        if (len(res) == 0 or re.search('<color=#\w*>', res[0]['msg']) or
-            Translator().detect(res[0]['msg']).lang == self.lang or res[0]['sender'] == ''):
-            res = ['receive']
+            self.lastId = res[0]['id']
+            if (len(res) == 0 or re.search('<color=#\w*>', res[0]['msg']) or
+                Translator().detect(res[0]['msg']).lang == self.lang or res[0]['sender'] == ''):
+                res = []
         return res
 
     def viewer (self, res):        
