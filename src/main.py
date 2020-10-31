@@ -44,7 +44,7 @@ class Main(Flask):
         winsound.Beep(880, 1000)
 
     def trans(self):
-        m = Message(self.params["lang"], self.params["accuracy"])
+        m = Message(self.params["lang"])
         while (True):
             sleep(1)
             res = m.checker()

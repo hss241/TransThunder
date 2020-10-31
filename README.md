@@ -16,12 +16,6 @@
     Example ) http://localhost:10101/
 5. It shows up just like the console!
 
-## More accurate translation
-- Setting accuracy to True in transthunder.ini will result in a more accurate translation
-  - You need to install Firefox (79.0) or Chrome (84.0.4147.30) or above version
-    - Firefox takes precedence
-    - Unsupported languages will still be translated as before
-
 ### Translated
 - Other languages
 
@@ -46,12 +40,6 @@
 4. このソフトを起動しているPCのIPアドレスとポート番号をブラウザに入力
     例)http://localhost:10101/
 5. コンソールと同じように表示される！
-
-## さらに正確な翻訳を行う
-- transthunder.iniでaccuracyをTrueに設定すると、より正確な翻訳になります
-  - Firefox(79.0)またはChrome(84.0.4147.30)以上のバージョンをインストールする必要があります
-    - Firefoxが優先されます
-    - サポートされていない言語は以前と同じように翻訳されます
 
 ### 翻訳されるもの
 - 他の言語
@@ -82,9 +70,6 @@
 
 - **win_unicode_console** by **Drekin**
   - https://github.com/Drekin/win-unicode-console
-
-- **selenium** by **Selenium**
-  - https://github.com/SeleniumHQ/selenium
 
 
 ## Notice

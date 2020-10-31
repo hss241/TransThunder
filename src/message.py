@@ -1,24 +1,17 @@
 import requests
 import json
 from googletrans import Translator
-from deepyl import DeepyL
 import re
 import os
 import colorama
 import win_unicode_console
 
 class Message():
-    def __init__(self, lang, accuracy):
+    def __init__(self, lang):
         self.lang = lang
         self.battle = False
         self.lastId = 0
-        os.system("title Normal Translation")
-        if (accuracy == "True" and any(lang in item for item in ["ja","en","de","fr","es","pt","it","nl","pl","ru","zh"])):
-            try:
-                self.dl = DeepyL(lang)
-                os.system("title High Accurate Translation")
-            except:
-                pass
+        os.system("title TransThunder")
         win_unicode_console.enable()
         colorama.init(autoreset=True)
 
@@ -35,7 +28,6 @@ class Message():
                     if (len(res) == 0): #新規メッセージがない場合
                         if (parameter == '0'):  #試合していない場合
                             if (self.battle is True):
-                                self.dl.close()
                                 self.battle = False
                         return res
 
@@ -58,13 +50,9 @@ class Message():
         if (self.battle is False):
             print ('------------------------------')
             res['bar'] = '------------------------------'
-            self.dl.get()
         
         trans = ""
-        if hasattr(self, "dl"):
-            trans = self.dl.io(msg) #deepl, Firefox or Chrome
-        if (msg == trans or trans == ""):   #deepl未対応言語だった場合
-            trans = Translator().translate(msg, dest = self.lang).text  #googletrans
+        trans = Translator().translate(msg, dest = self.lang).text
 
         print (team + res['sender'] + ' [' + res['mode'] + ']\r\n' + msg + '\r\n' + trans + '\r\n')
         res['trans'] = trans
