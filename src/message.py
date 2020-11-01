@@ -5,6 +5,7 @@ import re
 import os
 import colorama
 import win_unicode_console
+import time
 
 class Message():
     def __init__(self, lang):
@@ -24,17 +25,24 @@ class Message():
                     res = json.loads(requests.get('http://localhost:8111/gamechat?lastId=' + parameter).text)
                 except: #ゲームが起動していない場合
                     self.lastId = 0
+                    time.sleep(60)
                 finally:
                     if (len(res) == 0): #新規メッセージがない場合
+                        time.sleep(1)
                         if (parameter == '0'):  #試合していない場合
                             if (self.battle is True):
                                 self.battle = False
+                            time.sleep(10)
                         return res
 
             self.lastId = res[0]['id']
-            if (len(res) == 0 or re.search('<color=#\w*>', res[0]['msg']) or
-                Translator().detect(res[0]['msg']).lang == self.lang or res[0]['sender'] == ''):
-                res = []
+            while 1:
+                try:
+                    if (len(res) == 0 or re.search('<color=#\w*>', res[0]['msg']) or res[0]['sender'] == '' or Translator().detect(res[0]['msg']).lang == self.lang):   #どうあがいてもdetectでエラーが出る
+                        res = []
+                    break
+                except:
+                    time.sleep(0.5)
         return res
 
     def viewer (self, res):        
@@ -52,7 +60,12 @@ class Message():
             res['bar'] = '------------------------------'
         
         trans = ""
-        trans = Translator().translate(msg, dest = self.lang).text
+        while 1:
+            try:
+                trans = Translator().translate(msg, dest = self.lang).text
+                break
+            except:
+                time.sleep(0.5)
 
         print (team + res['sender'] + ' [' + res['mode'] + ']\r\n' + msg + '\r\n' + trans + '\r\n')
         res['trans'] = trans

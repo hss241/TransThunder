@@ -1,7 +1,6 @@
 from config import Config
 from message import Message
 from websocket_service import Websocket
-from time import sleep
 from flask import Flask, render_template, request, jsonify
 from jinja2 import FileSystemLoader
 from flask_cors import CORS
@@ -46,7 +45,6 @@ class Main(Flask):
     def trans(self):
         m = Message(self.params["lang"])
         while (True):
-            sleep(1)
             res = m.checker()
             if (len(res) == 0):
                 continue
