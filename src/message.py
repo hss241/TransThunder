@@ -36,13 +36,8 @@ class Message():
                         return res
 
             self.lastId = res[0]['id']
-            while 1:
-                try:
-                    if (len(res) == 0 or re.search('<color=#\w*>', res[0]['msg']) or res[0]['sender'] == '' or Translator().detect(res[0]['msg']).lang == self.lang):   #どうあがいてもdetectでエラーが出る
-                        res = []
-                    break
-                except:
-                    time.sleep(0.5)
+            if (len(res) == 0 or re.search('<color=#\w*>', res[0]['msg']) or res[0]['sender'] == '' or Translator(service_urls=['translate.googleapis.com']).detect(res[0]['msg']).lang == self.lang):
+                res = []
         return res
 
     def viewer (self, res):        
@@ -62,7 +57,7 @@ class Message():
         trans = ""
         while 1:
             try:
-                trans = Translator().translate(msg, dest = self.lang).text
+                trans = Translator(service_urls=['translate.googleapis.com']).translate(msg, dest = self.lang).text
                 break
             except:
                 time.sleep(0.5)
