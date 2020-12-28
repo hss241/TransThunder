@@ -36,7 +36,7 @@ class Message():
                         return res
 
             self.lastId = res[0]['id']
-            if (len(res) == 0 or re.search('<color=#\w*>', res[0]['msg']) or res[0]['sender'] == '' or Translator(service_urls=['translate.googleapis.com']).detect(res[0]['msg']).lang == self.lang):
+            if (len(res) == 0 or re.search('<color=#\w*>', res[0]['msg']) or res[0]['sender'] == '' or Translator().detect(res[0]['msg']).lang == self.lang):
                 res = []
         return res
 
@@ -57,7 +57,7 @@ class Message():
         trans = ""
         while 1:
             try:
-                trans = Translator(service_urls=['translate.googleapis.com']).translate(msg, dest = self.lang).text
+                trans = Translator().translate(msg, dest = self.lang).text
                 break
             except:
                 time.sleep(0.5)
