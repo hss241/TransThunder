@@ -2,13 +2,13 @@
 * ### 日本語での詳細説明
   * [https://github.com/hss241/TransThunder/wiki/Japanese](https://github.com/hss241/TransThunder/wiki/Japanese)
 * ### ダウンロード
-  * [https://github.com/hss241/TransThunder/releases/download/v3.3.0/TransThunder.exe](https://github.com/hss241/TransThunder/releases/download/v3.3.0/TransThunder.exe)
+  * [https://github.com/hss241/TransThunder/raw/master/TransThunder.exe](https://github.com/hss241/TransThunder/raw/master/TransThunder.exe)
 ---
 ## This software translates chats in battle in WarThunder
 * ### Detailed explanation in English
   * [https://github.com/hss241/TransThunder/wiki/English](https://github.com/hss241/TransThunder/wiki/English)
 * ### Download
-  * [https://github.com/hss241/TransThunder/releases/download/v3.3.0/TransThunder.exe](https://github.com/hss241/TransThunder/releases/download/v3.3.0/TransThunder.exe)
+  * [https://github.com/hss241/TransThunder/raw/master/TransThunder.exe](https://github.com/hss241/TransThunder/raw/master/TransThunder.exe)
 ---
 
 ### Icon
