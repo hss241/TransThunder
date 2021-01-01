@@ -24,35 +24,32 @@ class Message():
 
     def checker(self):   #翻訳するメッセージの選択
         res = []
-        while (len(res) == 0):
-            lastIdList = ['0', str(self.lastId)]
-            for parameter in lastIdList:
-                try:
-                    res = json.loads(requests.get('http://localhost:8111/gamechat?lastId=' + parameter).text)
-                except: #ゲームが起動していない場合
-                    self.lastId = 0
-            else:
-                if (len(res) == 0): #新規メッセージがない場合
-                    if (parameter == '0'):  #試合していない場合
-                        if (self.battle is True):
-                            self.deepl.close()
-                            self.battle = False
-                    res = []
-                    sleep(1)
-                    continue
+        lastIdList = ['0', str(self.lastId)]
+        for parameter in lastIdList:
+            try:
+                res = json.loads(requests.get('http://localhost:8111/gamechat?lastId=' + parameter).text)
+            except: #ゲームが起動していない場合
+                self.lastId = 0
+            if (len(res) == 0): #新規メッセージがない場合
+                if (parameter == '0' and self.battle is True):  #試合していないかつ既に戦闘後の場合
+                    self.battle = False
+                    self.deepl.close()
+                sleep(1)
+                return res                
 
-            res = res[0]
-            self.lastId = res['id']
-            res['msg'] = res['msg'].replace('\t', '')
-            if (len(res) == 0 or re.search('<color=#\w*>', res['msg']) or
-                Translator().detect(res['msg']).lang == self.lang or res['sender'] == ''):
-                res = []
+        res = res[0]
+        self.lastId = res['id']
+        res['msg'] = res['msg'].replace('\t', '')
+        if (len(res) == 0 or re.search('<color=#\w*>', res['msg']) or
+            Translator().detect(res['msg']).lang == self.lang or res['sender'] == ''):
+            res = []
         return res
 
     def viewer (self, res):
         if (self.battle is False):
             print ('------------------------------')
             res['bar'] = '------------------------------'
+            self.battle = True
             self.deepl.get()
 
         reset = colorama.Back.RESET
@@ -70,6 +67,5 @@ class Message():
             res['trans'] = Translator().translate(res['msg'], dest = self.lang).text
 
         print (res['use'] + "\r\n" + res['msg'] + "\r\n" + res['trans'] + "\r\n")
-        self.battle = True
-
+        
         return json.dumps(res)
