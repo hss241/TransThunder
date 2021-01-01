@@ -5,7 +5,7 @@
 3. Restart after changing the target language
 4. The chat in combat is translated and comes out on the console!
 
-## Beep when you receive a chat
+## Beep when you receive a chat with or without a translation
 1. Rewrite transthunder.ini's beep to True
 
 ## You can view the translation results in your browser ( Even on your smartphone )
@@ -15,6 +15,12 @@
 4. Enter the IP address and port number of the PC on which this software is running into your browser
     Example ) http://localhost:10101/
 5. It shows up just like the console!
+
+## DeepL translation
+- Setting deepl to True in transthunder.ini will result in DeepL translation
+  - You need to install Firefox (79.0) or Chrome (84.0.4147.30) or above version
+    - Firefox takes precedence
+    - Unsupported languages will still be translated as before
 
 ### Translated
 - Other languages
@@ -30,7 +36,7 @@
 3. 翻訳先言語を変更したら、再起動する
 4. 戦闘中のチャットが翻訳されてコンソールに出てくる！
 
-## チャットを受信した時にビープ音を鳴らす
+## 翻訳の有無にかかわらず、チャットを受信した時にビープ音を鳴らす
 1. transthunder.iniのbeepをTrueに書き換える
 
 ## 翻訳結果をブラウザで表示できます(スマホでも可能)
@@ -40,6 +46,12 @@
 4. このソフトを起動しているPCのIPアドレスとポート番号をブラウザに入力
     例)http://localhost:10101/
 5. コンソールと同じように表示される！
+
+## DeepLを用いた翻訳を行う
+- transthunder.iniでdeeplをTrueに設定すると、DeepLを用いた翻訳になります
+  - Firefox(79.0)またはChrome(84.0.4147.30)以上のバージョンをインストールする必要があります
+    - Firefoxが優先されます
+    - サポートされていない言語は以前と同じように翻訳されます
 
 ### 翻訳されるもの
 - 他の言語
@@ -70,6 +82,9 @@
 
 - **win_unicode_console** by **Drekin**
   - https://github.com/Drekin/win-unicode-console
+
+- **selenium** by **Selenium**
+  - https://github.com/SeleniumHQ/selenium
 
 
 ## Notice

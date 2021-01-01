@@ -43,11 +43,9 @@ class Main(Flask):
         winsound.Beep(880, 1000)
 
     def trans(self):
-        m = Message(self.params["lang"])
+        m = Message(self.params["lang"], self.params["deepl"])
         while (True):
             res = m.checker()
-            if (len(res) == 0):
-                continue
             res = m.viewer(res)
             if (self.params["beep"] == "True"):
                 th = threading.Thread(target=self.beep)
