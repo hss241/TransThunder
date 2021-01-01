@@ -1,8 +1,8 @@
 ## WarThunderでの戦闘中のチャットを翻訳するソフトです!
-### [日本語での詳細説明](https://github.com/hss241/TransThunder/wiki/Japanese)
+* ### [日本語での詳細説明](https://github.com/hss241/TransThunder/wiki/Japanese)
 ---
 ## This software translates chats in battle in WarThunder
-### [Detailed explanation in English](https://github.com/hss241/TransThunder/wiki/English)
+* ### [Detailed explanation in English](https://github.com/hss241/TransThunder/wiki/English)
 ---
 
 ### Icon
