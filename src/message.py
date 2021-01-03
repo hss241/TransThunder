@@ -59,12 +59,12 @@ class Message():
         print(res['team'] + res['sender'] + " [" + res['mode'] + "]", end="")
 
         if hasattr(self, "deepl"):
-            res['use'] = " <DeepL>"
+            res['use'] = "DeepL"
             res['trans'] = self.deepl.io(res['msg'])
         if (res['msg'] == res['trans'] or res['trans'] == ""):   #deepl未対応言語だった場合
-            res['use'] = " <Google>"
+            res['use'] = "Google"
             res['trans'] = Translator().translate(res['msg'], dest = self.lang).text
 
-        print (res['use'] + "\r\n" + res['msg'] + "\r\n" + res['trans'] + "\r\n")
+        print (" <" + res['use'] + ">\r\n" + res['msg'] + "\r\n" + res['trans'] + "\r\n")
         
         return json.dumps(res)
