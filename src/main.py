@@ -1,3 +1,4 @@
+from update import Update
 from config import Config
 from message import Message
 from websocket_service import Websocket
@@ -56,6 +57,7 @@ class Main(Flask):
                 self.ws.send_message(res)
 
     def main(self):
+        Update().check()
         if (self.params["browse"] == "True"):
             th1 = threading.Thread(target=self.websock)
             th1.start()
@@ -69,4 +71,3 @@ class Main(Flask):
 if __name__ == "__main__":
     m = Main()
     m.main()
-

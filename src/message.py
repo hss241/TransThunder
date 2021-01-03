@@ -13,7 +13,6 @@ class Message():
         self.lang = lang
         self.battle = False
         self.lastId = 0
-        os.system("title TransThunder")
         if (deepl == "True" and any(lang in item for item in ["ja","en","de","fr","es","pt","it","nl","pl","ru","zh"])):
             try:
                 self.deepl = DeepyL(lang)
