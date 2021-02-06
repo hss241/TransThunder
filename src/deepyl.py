@@ -6,7 +6,7 @@ from resource_path import Resource_path
 class DeepyL():
     def __init__(self, lang):
         self.load_url = "https://www.deepl.com/" + lang + "/translator"
-        self.in_sel = "//div[@id='dl_translator']/div[3]/div[2]/div[1]/div[2]/div/textarea"
+        self.in_sel = "//div[@id='dl_translator']/div[5]/div[2]/div[1]/div[2]/div/textarea"
         self.out_sel = "target-dummydiv"
         try:
             self.get()
