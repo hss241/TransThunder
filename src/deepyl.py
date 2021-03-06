@@ -40,9 +40,9 @@ class DeepyL():
             try:
                 result = self.driver.find_element_by_id(self.out_sel).get_attribute("textContent")
                 if (tmp != result and len(result) != 1):
-                    return result
+                    tmp = result
                 cnt = cnt - 1
                 time.sleep(1)
             except:
                 pass
-        return ""
+        return result

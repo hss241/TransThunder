@@ -13,7 +13,8 @@ class Message():
         self.lang = lang
         self.battle = False
         self.lastId = 0
-        if (deepl == "True" and any(lang in item for item in ["ja","en","de","fr","es","pt","it","nl","pl","ru","zh"])):
+        self.deepl_supported = ["ja","en","de","fr","es","pt","it","nl","pl","ru","zh"]
+        if (deepl == "True" and any(lang in item for item in self.deepl_supported)):
             try:
                 self.deepl = DeepyL(lang)
             except:
@@ -58,10 +59,10 @@ class Message():
             res['team'] = colorama.Back.CYAN + ':' + reset + ' '
         print(res['team'] + res['sender'] + " [" + res['mode'] + "]", end="")
 
-        if hasattr(self, "deepl"):
+        if hasattr(self, "deepl") and any(Translator().detect(res['msg']).lang in item for item in self.deepl_supported):
             res['use'] = "DeepL"
             res['trans'] = self.deepl.io(res['msg'])
-        if (res['msg'] == res['trans'] or res['trans'] == ""):   #deepl未対応言語だった場合
+        else:   #deepl翻訳できなかった場合
             res['use'] = "Google"
             res['trans'] = Translator().translate(res['msg'], dest = self.lang).text
 
