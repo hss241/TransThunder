@@ -13,7 +13,7 @@ class Message():
         self.lang = lang
         self.battle = False
         self.lastId = 0
-        self.deepl_supported = ["ja","en","de","fr","es","pt","it","nl","pl","ru","zh-CN","zh-TW"] //googleではzh-CN,zh-TWの言語コードなので
+        self.deepl_supported = ["ja","en","de","fr","es","pt","it","nl","pl","ru","zh-CN","zh-TW"] #googleではzh-CN,zh-TWの言語コードなので
         if (deepl == "True" and any(lang in item for item in self.deepl_supported)):
             try:
                 self.deepl = DeepyL(lang)
