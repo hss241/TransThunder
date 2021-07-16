@@ -6,7 +6,7 @@ from resource_path import Resource_path
 class DeepyL():
     def __init__(self, lang):
         self.load_url = "https://www.deepl.com/" + lang + "/translator"
-        self.in_sel = "//div[@id='dl_translator']/div[5]/div[4]/div[1]/div[2]/div/textarea"
+        self.in_sel = "//textarea"
         self.out_sel = "target-dummydiv"
         try:
             self.get()
@@ -35,7 +35,7 @@ class DeepyL():
         self.driver.find_element_by_xpath(self.in_sel).send_keys(text)
 
         tmp = ""
-        cnt = 5
+        cnt = 10
         while (cnt > 0):
             try:
                 result = self.driver.find_element_by_id(self.out_sel).get_attribute("textContent")
