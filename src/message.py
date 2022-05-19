@@ -33,7 +33,8 @@ class Message():
             if (len(res) == 0): #新規メッセージがない場合
                 if (parameter == '0' and self.battle is True):  #試合していないかつ既に戦闘後の場合
                     self.battle = False
-                    self.deepl.close()
+                    if "deepl" in globals():
+                        self.deepl.close()
                 sleep(1)
                 return res                
 
@@ -50,7 +51,8 @@ class Message():
             print ('------------------------------')
             res['bar'] = '------------------------------'
             self.battle = True
-            self.deepl.get()
+            if "deepl" in globals():
+                self.deepl.get()
 
         reset = colorama.Back.RESET
         if (res['enemy'] == True):
