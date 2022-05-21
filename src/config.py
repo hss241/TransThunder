@@ -4,7 +4,7 @@ import configparser
 
 class Config:
     def __init__(self):
-        inistr = ['[MAIN]', '\n','lang=','en', '\n',';Display translation results in a browser? ( True or False ) ', '\n','browse=','False', '\n',';Beep when you receive a chat ( True or False ) ', '\n','beep=','False', '\n',';Translation using DeepL ( True or False ) ', '\n','deepl=','True', '\n', '\n', '[PORT]', '\n','flask=','10101', '\n','websocket=','10102', '\n', '\n', '[IP]', '\n',';Allow access only to this IP address', '\n','host=','0.0.0.0']
+        inistr = ['[MAIN]', '\n', ';Refer to this page and specify the language code of the target language. (https://cloud.google.com/translate/docs/languages?hl=en)', '\n','lang=','en', '\n\n',';Display translation results in a browser? ( True or False ) ', '\n', ';Type in your browser to access(localhost:10101)', '\n','browse=','False', '\n\n',';Beep when you receive a chat ( True or False ) ', '\n','beep=','True', '\n\n', ';Translation using DeepL ( True or False )', '\n',';Uses browser language.', '\n','deepl=','True', '\n\n\n', '[PORT]', '\n','flask=','10101', '\n','websocket=','10102', '\n\n', '[IP]', '\n',';Allow access only to this IP address', '\n','host=','0.0.0.0']
         if not os.path.exists('./transthunder.ini'):
             self.iniEditor(inistr)
         params = self.iniReader()

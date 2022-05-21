@@ -7,7 +7,7 @@ import subprocess
 
 class Update():
     def __init__(self):
-        self.version = "v3.4.9"
+        self.version = "v3.5.0"
         os.system("title TransThunder " + self.version)
 
         self.dlurl = "https://github.com/hss241/TransThunder/blob/master/TransThunder.exe?raw=true"
