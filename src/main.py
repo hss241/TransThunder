@@ -21,8 +21,12 @@ class Main(Flask):
         self.jinja_loader = FileSystemLoader(Resource_path("./templates"))
         c = Config()
         self.params = c.iniReader()
-        self.sock_port = self.params["websocket"]
-        self.host = self.params["host"]
+        self.browse_port = self.params["browse_port"]
+        self.sock_port = int(self.browse_port) - 1
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        self.host = s.getsockname()[0]
 
         @self.route("/", methods=["GET"])
         def index():
@@ -38,13 +42,13 @@ class Main(Flask):
         self.ws.main()
 
     def flask(self):
-        self.run(debug=False, host=self.host, port=self.params["flask"])
+        self.run(debug=False, host=self.host, port=self.browse_port)
 
     def beep(self):
         winsound.Beep(880, 1000)
 
     def trans(self):
-        m = Message(self.params["lang"], self.params["deepl"])
+        m = Message(self.params["lang"])
         while (True):
             res = m.checker()
             if (len(res) == 0):
@@ -53,17 +57,18 @@ class Main(Flask):
             if (self.params["beep"] == "True"):
                 th = threading.Thread(target=self.beep)
                 th.start()
-            if (self.params["browse"] == "True"):
                 self.ws.send_message(res)
 
     def main(self):
         Update().check()
-        if (self.params["browse"] == "True"):
-            th1 = threading.Thread(target=self.websock)
-            th1.start()
-            th2 = threading.Thread(target=self.flask)
-            th2.start()
+        th1 = threading.Thread(target=self.websock)
+        th1.start()
+        th2 = threading.Thread(target=self.flask)
+        th2.start()
         os.system("cls")
+        print('Access your browser to check translation results.')
+        print('http://' + self.host + ':' + self.browse_port)
+
         th3 = threading.Thread(target=self.trans)
         th3.start()
         th3.join()

@@ -1,23 +1,16 @@
 import requests
 import json
 from googletrans import Translator
-from deepyl import DeepyL
 import re
-import os
 import colorama
 import win_unicode_console
 from time import sleep
 
 class Message():
-    def __init__(self, lang, deepl):
+    def __init__(self, lang):
         self.lang = lang
         self.battle = False
         self.lastId = 0
-        if (deepl == "True"):
-            try:
-                self.deepl = DeepyL()
-            except:
-                pass
         win_unicode_console.enable()
         colorama.init(autoreset=True)
 
@@ -32,10 +25,8 @@ class Message():
             if (len(res) == 0): #新規メッセージがない場合
                 if (parameter == '0' and self.battle is True):  #試合していないかつ既に戦闘後の場合
                     self.battle = False
-                    if hasattr(self, "deepl"):
-                        self.deepl.close()
                 sleep(1)
-                return res                
+                return res
 
         res = res[0]
         self.lastId = res['id']
@@ -50,8 +41,6 @@ class Message():
             print ('------------------------------')
             res['bar'] = '------------------------------'
             self.battle = True
-            if hasattr(self, "deepl"):
-                self.deepl.get()
 
         reset = colorama.Back.RESET
         if (res['enemy'] == True):
@@ -60,13 +49,8 @@ class Message():
             res['team'] = colorama.Back.CYAN + ':' + reset + ' '
         print(res['team'] + res['sender'] + " [" + res['mode'] + "]", end="")
 
-        if hasattr(self, "deepl"):
-            res['use'] = "DeepL"
-            res['trans'] = self.deepl.io(res['msg'])
-        else:   #deepl翻訳できなかった場合
-            res['use'] = "Google"
-            res['trans'] = Translator().translate(res['msg'], dest = self.lang).text
+        res['trans'] = Translator().translate(res['msg'], dest = self.lang).text
 
-        print (" <" + res['use'] + ">\r\n" + res['msg'] + "\r\n" + res['trans'] + "\r\n")
+        print ("\r\n" + res['msg'] + "\r\n" + res['trans'] + "\r\n")
         
         return json.dumps(res)

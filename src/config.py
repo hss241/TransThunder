@@ -4,15 +4,18 @@ import configparser
 
 class Config:
     def __init__(self):
-        inistr = ['[MAIN]', '\n', ';Refer to this page and specify the language code of the target language. (https://cloud.google.com/translate/docs/languages?hl=en)', '\n','lang=','en', '\n\n',';Display translation results in a browser? ( True or False ) ', '\n', ';Type in your browser to access(localhost:10101)', '\n','browse=','False', '\n\n',';Beep when you receive a chat ( True or False ) ', '\n','beep=','True', '\n\n', ';Translation using DeepL ( True or False )', '\n',';Uses browser language.', '\n','deepl=','True', '\n\n\n', '[PORT]', '\n','flask=','10101', '\n','websocket=','10102', '\n\n', '[IP]', '\n',';Allow access only to this IP address', '\n','host=','0.0.0.0']
+        inistr = ['[MAIN]', '\n', ';Refer to this page and specify the language code of the target language. (https://cloud.google.com/translate/docs/languages?hl=en)', '\n','lang=','en', '\n\n', ';Beep when you receive a chat ( True or False ) ', '\n','beep=','True', '\n\n\n', '[PORT]', '\n','browse_port=','10101']
         if not os.path.exists('./transthunder.ini'):
             self.iniEditor(inistr)
         params = self.iniReader()
-        if (len(params) == 7):  #設定値の個数
+        if (len(params) == 3):  #設定値の個数
             return
         
         for param in params:
-            inistr[inistr.index(param + '=') + 1] = params[param]
+            try:
+                inistr[inistr.index(param + '=') + 1] = params[param]
+            except:
+                pass
         self.iniEditor(inistr)
 
     def iniEditor(self, inistr):
