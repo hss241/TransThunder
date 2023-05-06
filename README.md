@@ -34,9 +34,5 @@
 - **win_unicode_console** by **Drekin**
   - https://github.com/Drekin/win-unicode-console
 
-- **selenium** by **Selenium**
-  - https://github.com/SeleniumHQ/selenium
-
-
 ## Notice
 - This software includes the work that is distributed in the Apache License 2.0
