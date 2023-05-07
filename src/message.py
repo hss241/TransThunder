@@ -31,9 +31,14 @@ class Message():
         res = res[0]
         self.lastId = res['id']
         res['msg'] = res['msg'].replace('\t', '')
-        if (len(res) == 0 or re.search('<color=#\w*>', res['msg']) or
-            Translator().detect(res['msg']).lang == self.lang or res['sender'] == ''):
-            res = []
+        lang_ditect = False
+        while(lang_ditect == False):
+            try:
+                if (len(res) == 0 or type(re.search('<color=#\w*>', res['msg'])) == re.Match or res['sender'] == '' or Translator().detect(res['msg']).lang == self.lang):
+                    res = []
+                lang_ditect = True
+            except:
+                sleep(1)
         return res
 
     def viewer (self, res):
